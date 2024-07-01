@@ -33,6 +33,21 @@ def terraformResource = getTerraformConfig(15) // Enter a workflow ID here
 String buildTerraformConfig(Map terraformResource) {
     def workflow = terraformResource.workflowOne
     return """
+terraform {
+  required_providers {
+    morpheus = {
+      source  = "gomorpheus/morpheus"
+      version = "0.9.8"
+    }
+  }
+}
+
+provider "morpheus" {
+  url      = "${morpheus.applianceUrl}"
+  username = "${username}"
+  password = "${password}"
+}
+
 resource "morpheus_operational_workflow" "${workflow.name}" {
   name   = "${workflow.name}"
   labels = ${JsonOutput.toJson(workflow.labels)}
