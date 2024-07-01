@@ -1,0 +1,1 @@
+# scribe-to-terraform-resource-duplicator
